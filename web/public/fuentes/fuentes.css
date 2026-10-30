@@ -1,0 +1,8 @@
+/* Inter, servida desde aquí (ver LICENCIA-inter.txt). */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("./inter.woff2") format("woff2");
+}

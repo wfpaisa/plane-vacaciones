@@ -1,0 +1,25 @@
+# Producción: el proxy inverso del servidor (HTTPS) reenvía el dominio a 127.0.0.1:${HOST_PORT}.
+services:
+  vacaciones:
+    build: .
+    image: vacaciones:latest
+    container_name: vacaciones
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:${HOST_PORT:-8090}:8090"
+    # Los datos viven fuera de src/ (que se reemplaza en cada despliegue), en
+    # /home/vigotes/vacaciones/pb_data. PocketBase deja sus respaldos en
+    # pb_data/backups y de ahí los recoge Proxmox (CT 111) cada noche.
+    volumes:
+      - ../pb_data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+

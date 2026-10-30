@@ -1,0 +1,37 @@
+
+# ---------------------------------------------------------------
+# Vacaciones — un contenedor Docker que escucha SOLO en
+# 127.0.0.1:8090. PocketBase sirve la API y la web compilada.
+# Lo actualiza desplegar.sh del repositorio vacaciones.
+# ---------------------------------------------------------------
+
+vacaciones.wfelipe.com {
+	import seguridad
+	encode zstd gzip
+
+	# Inicio de sesión: 10 intentos por minuto (anti fuerza bruta).
+	@auth path /api/collections/*/auth-with-*
+	rate_limit @auth {
+		zone vacaciones_auth {
+			key {remote_host}
+			events 10
+			window 1m
+		}
+	}
+
+	# El panel de PocketBase vive en /db/ y no en /_/.
+	redir /db /db/
+	handle_path /db/* {
+		rewrite * /_{path}
+		reverse_proxy 127.0.0.1:8090
+	}
+
+	@panel path /_ /_/*
+	handle @panel {
+		respond 404
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:8090
+	}
+}

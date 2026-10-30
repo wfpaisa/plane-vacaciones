@@ -1,0 +1,7 @@
+node_modules
+pb/pocketbase
+pb/pb_data
+pb/pb_public
+web/dist
+.env
+.env.production

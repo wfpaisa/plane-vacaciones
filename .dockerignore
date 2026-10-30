@@ -1,0 +1,10 @@
+*
+!package.json
+!bun.lock
+!tsconfig.json
+!web
+web/dist
+web/node_modules
+!pb/pb_migrations
+!pb/pb_hooks
+!docker

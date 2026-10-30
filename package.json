@@ -1,0 +1,32 @@
+{
+  "name": "vacaciones",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "bun install && bun run pocketbase:get && bun run env:init",
+    "pocketbase:get": "bun run scripts/get-pocketbase.ts",
+    "env:init": "cp -n .env.example .env || true",
+    "dev": "bun run scripts/dev.ts",
+    "build": "bunx --bun vite build --config web/vite.config.ts",
+    "start": "bun run scripts/start.ts",
+    "demo": "bun run scripts/demo.ts",
+    "typecheck": "svelte-check --tsconfig ./web/tsconfig.json --threshold error"
+  },
+  "dependencies": {
+    "@fontsource-variable/outfit": "^5.3.0",
+    "maplibre-gl": "^6.14.0",
+    "pocketbase": "^0.28.1"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@types/bun": "^1.4.3",
+    "@types/geojson": "^7946.0.16",
+    "@types/google.maps": "^3.66.6",
+    "svelte": "^5.57.2",
+    "svelte-check": "^4.7.6",
+    "typescript": "5",
+    "vite": "7"
+  }
+}

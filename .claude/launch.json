@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "vacaciones", "runtimeExecutable": "bun", "runtimeArgs": ["run", "dev"], "port": 3434 },
+    { "name": "vacaciones-web", "runtimeExecutable": "bunx", "runtimeArgs": ["--bun", "vite", "--config", "web/vite.config.ts", "--port", "3444", "--strictPort"], "port": 3444 }
+  ]
+}
